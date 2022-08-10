@@ -14,6 +14,8 @@ import { UsersService } from './users.service';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ValidationPipe } from './../pipes/validation.pipe';
+import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserMDBDto } from './dto/create-user-mdb.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -31,6 +33,11 @@ export class UsersController {
       );
     }
     return this.userService.getUserByLogin(dto.login);
+  }
+
+  @Post('/mcreate')
+  createMUser(@Body() dto: CreateUserMDBDto) {
+    return this.userService.createDBUser(dto);
   }
 
   // @ApiOperation({ summary: 'Создание нового юзера' })
