@@ -1,22 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+async function getClicks() {
+  const res = await fetch("http://localhost:5500/users/clicks");
+  const clicks = await res.json();
+  return clicks;
+}
+
+type Click = {
+  _id: string
+  clickDate: string
+}
 
 function App() {
+  const [clicks, setClicks] = useState<Click[]>([]);
+
+  useEffect(() => {
+    getClicks().then((r) => {
+      setClicks([...clicks, ...r]);
+    });
+  }, [setClicks]);
+
+  const clickHandler = () => {
+    fetch("http://localhost:5500/users/click", {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json;charset=UTF-8',
+      },
+      body: JSON.stringify({ clickDate: Date.now() }),
+    }).then(res => res.json()).then(data => { console.log(data);
+     setClicks([...clicks, data]) }).catch(e=>console.log(e)
+    );
+
+
+
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <h1>My db knows {clicks.length} clicks!</h1>
+        <p style={{color: "lightblue"}}>Last clicks:</p>
+        {clicks.slice(clicks.length - 5, clicks.length).map((cl) => {
+
+          const dateText = new Date(Number(cl.clickDate))
+          return <p key={cl._id}>{String(dateText.toLocaleString()) }</p>
+})}
         <a
           className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
+          href="#"
+          onClick={clickHandler}
           rel="noopener noreferrer"
         >
-          Learn React
+          Make a new click
         </a>
       </header>
     </div>
