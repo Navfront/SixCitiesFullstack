@@ -1,14 +1,17 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import appModel from 'src/app.model';
 import { CreateUserDto } from './dto/create-user.dto';
-import { CreateUserMDBDto } from './dto/create-user-mdb.dto';
+
 import { InjectModel } from '@nestjs/mongoose';
-import { User, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
+import { CreateClickDto } from './dto/create-click-mdb.dto';
+import { Click, UserDocument } from './schemas/click.schema';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(Click.name) private clickModel: Model<UserDocument>,
+  ) {}
 
   async getUserByLogin(login: string) {
     const user = await appModel.findUserByName(login);
@@ -25,7 +28,12 @@ export class UsersService {
     });
   }
 
-  async createDBUser(userDto: CreateUserMDBDto) {
-    return await this.userModel.create(userDto);
+  async createClick(clickDto: CreateClickDto) {
+    const newClick = new this.clickModel(clickDto);
+    return await newClick.save();
+  }
+
+  async getClicks() {
+    return await this.clickModel.find().exec();
   }
 }

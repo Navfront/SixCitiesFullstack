@@ -3,14 +3,15 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema, User } from './schemas/user.schema';
+import { ClickSchema, Click } from './schemas/click.schema';
+
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService],
   imports: [
     JwtModule,
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: Click.name, schema: ClickSchema }]),
   ],
 })
 export class UsersModule {}

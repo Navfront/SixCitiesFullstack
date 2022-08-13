@@ -7,6 +7,7 @@ import {
   HttpException,
   HttpStatus,
   UsePipes,
+  Get,
 } from '@nestjs/common';
 import { GetUserByLogin } from './dto/get-user-by-login.dto';
 import { UsersService } from './users.service';
@@ -16,6 +17,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ValidationPipe } from './../pipes/validation.pipe';
 import { CreateUserDto } from './dto/create-user.dto';
 import { CreateUserMDBDto } from './dto/create-user-mdb.dto';
+import { CreateClickDto } from './dto/create-click-mdb.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -35,9 +37,14 @@ export class UsersController {
     return this.userService.getUserByLogin(dto.login);
   }
 
-  @Post('/mcreate')
-  createMUser(@Body() dto: CreateUserMDBDto) {
-    return this.userService.createDBUser(dto);
+  @Post('/click')
+  createClick(@Body() dto: CreateClickDto) {
+    return this.userService.createClick(dto);
+  }
+
+  @Get('/clicks')
+  getClicks() {
+    return this.userService.getClicks();
   }
 
   // @ApiOperation({ summary: 'Создание нового юзера' })

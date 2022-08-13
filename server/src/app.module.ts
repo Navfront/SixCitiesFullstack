@@ -12,9 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
   controllers: [AppController],
   providers: [AppService],
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://adminus:26BHnkmbzJghxpJk@cluster0.f3n7anj.mongodb.net/sixcities?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRoot(process.env.MONGO),
     // ConfigModule.forRoot({ envFilePath: '.env' }),
     JwtModule.register({
       secret: process.env.SECRET || 'secret',
