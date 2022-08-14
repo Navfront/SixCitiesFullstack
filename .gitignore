@@ -7,6 +7,7 @@
 /project/.pnp
 /project/.pnp.js
 
+
 # testing
 project/coverage
 
@@ -29,3 +30,5 @@ yarn-error.log*
 .vscode
 
 project.rar
+
+docker-compose.yml
