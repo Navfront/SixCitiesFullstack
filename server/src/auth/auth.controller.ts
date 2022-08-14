@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 import { ValidationPipe } from './../pipes/validation.pipe';
 
 @ApiTags('Auth')
-@Controller('auth')
+@Controller('/')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
