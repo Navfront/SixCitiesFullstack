@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 
-const URL = process.env.REACT_APP_SURV || "http://localhost:5500/api/"
+const URL = process.env.REACT_APP_SURV || "https://sixcities.navfront.ru/api/"
 console.log('env react url = ', process.env.REACT_APP_SURV);
 
 
