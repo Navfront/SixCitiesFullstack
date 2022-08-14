@@ -19,12 +19,28 @@ export class AuthService {
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private userService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) {
+    userModel.findOne({ email: 'ya@ya.ru' }).then((admin) => {
+      if (!admin) {
+        userModel.create({
+          email: 'ya@ya.ru',
+          password:
+            process.env.ADMIN_PASSWORD ||
+            '$2b$05$x9RcJi6OtRY14/w/BMP1Aexs89OjsmXmlIvtq6QC0ikYIpxFg2aaK',
+          username: 'Admin',
+          role: 'admin',
+        });
+        console.log('Created new admin');
+      } else {
+        console.log('Admin is there!');
+      }
+    });
+  }
 
   // Проверяем пользователя и отдаем токен
   async login(userDto: LoginUserDto) {
     const user = await this.validateUser({ ...userDto, username: '' });
-    return this.generateToken(user.email, user._id);
+    return this.generateToken(user.email, user._id, user.role);
   }
 
   // Регистрируем нового пользователя и отдаем токен
@@ -38,21 +54,24 @@ export class AuthService {
     }
 
     const hashPassword = await bcrypt.hash(userDto.password, 5);
+    console.log(hashPassword);
+
     const user = await this.userModel.create({
       ...userDto,
       password: hashPassword,
+      role: 'user',
     });
 
     if (user) {
-      return this.generateToken(user.email, user._id);
+      return this.generateToken(user.email, user._id, user.role);
     }
 
     throw new HttpException('Ошибка сервера', HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   // Генерируем токен по имени и ид пользователя
-  private async generateToken(username: string, userId: string) {
-    const payload = { username, userId };
+  private async generateToken(username: string, userId: string, role: string) {
+    const payload = { username, userId, role };
     return {
       token: this.jwtService.sign(payload, {
         secret: process.env.SECRET || 'secret',

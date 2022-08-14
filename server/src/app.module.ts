@@ -7,12 +7,15 @@ import { TodosModule } from './todos/todos.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
+import { HotelsModule } from './hotels/hotels.module';
 
 @Module({
   controllers: [AppController],
   providers: [AppService],
   imports: [
-    MongooseModule.forRoot(process.env.MONGO || 'mongodb://localhost:27017'),
+    MongooseModule.forRoot(
+      process.env.MONGO || 'mongodb://localhost:27017/sixcities',
+    ),
     // ConfigModule.forRoot({ envFilePath: '.env' }),
     JwtModule.register({
       secret: process.env.SECRET || 'secret',
@@ -23,6 +26,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     AuthModule,
     UsersModule,
     TodosModule,
+    HotelsModule,
   ],
 })
 export class AppModule {}
