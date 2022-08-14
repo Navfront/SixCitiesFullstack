@@ -11,6 +11,7 @@ import * as bcrypt from 'bcrypt';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from 'src/users/schemas/user.schema';
 import { Model } from 'mongoose';
+import { LoginUserDto } from 'src/users/dto/login-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,8 +22,8 @@ export class AuthService {
   ) {}
 
   // Проверяем пользователя и отдаем токен
-  async login(userDto: CreateUserDto) {
-    const user = await this.validateUser(userDto);
+  async login(userDto: LoginUserDto) {
+    const user = await this.validateUser({ ...userDto, username: '' });
     return this.generateToken(user.email, user._id);
   }
 
