@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+const URL = process.env.SURL || "http://localhost:5500/"
+console.log('url = ', URL);
+
+
 async function getClicks() {
-  const res = await fetch("http://localhost:5500/users/clicks");
+  const res = await fetch(`${URL}users/clicks`);
   const clicks = await res.json();
   return clicks;
 }
@@ -23,7 +27,7 @@ function App() {
   }, [setClicks]);
 
   const clickHandler = () => {
-    fetch("http://localhost:5500/users/click", {
+    fetch(`${URL}users/click`, {
       method: "POST",
       headers: {
         'content-type': 'application/json;charset=UTF-8',
