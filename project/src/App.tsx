@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-const URL = process.env.SURL || "http://localhost:5500/"
-console.log('url = ', URL);
+
+const URL = process.env.REACT_APP_SURV || "http://localhost:5500/api/"
+console.log('env react url = ', process.env.REACT_APP_SURV);
 
 
 async function getClicks() {
