@@ -13,6 +13,9 @@ export class Location {
 
   @Prop({ required: true })
   zoom: number;
+
+  // @Prop()
+  // hotelId: string;
 }
 
 export const LocationSchema = SchemaFactory.createForClass(Location);
