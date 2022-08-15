@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HotelsModule } from './hotels/hotels.module';
+import { ReviewsModule } from './reviews/reviews.module';
+import { CitiesModule } from './cities/cities.module';
 
 @Module({
   controllers: [AppController],
@@ -27,6 +29,8 @@ import { HotelsModule } from './hotels/hotels.module';
     UsersModule,
     TodosModule,
     HotelsModule,
+    ReviewsModule,
+    CitiesModule,
   ],
 })
 export class AppModule {}

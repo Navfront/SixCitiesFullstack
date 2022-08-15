@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type UserDocument = Hotel & Document;
+export type HotelDocument = Hotel & Document;
 
 @Schema()
 export class Hotel {
@@ -51,4 +51,4 @@ type HTL = {
   type: 'apartment';
 };
 
-export const UserSchema = SchemaFactory.createForClass(Hotel);
+export const HotelSchema = SchemaFactory.createForClass(Hotel);
