@@ -1,7 +1,7 @@
 import { IsDateString, IsNumber, IsString, Length } from 'class-validator';
 export class CreateReviewDto {
   @IsString()
-  userId: string;
+  hotelId: string;
 
   @IsNumber()
   rating: number;

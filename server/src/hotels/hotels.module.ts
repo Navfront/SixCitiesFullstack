@@ -7,11 +7,13 @@ import { Hotel, HotelSchema } from './schemas/hotel.schema';
 import { Location, LocationSchema } from 'src/cities/schemas/location.schema';
 import { User, UserSchema } from 'src/users/schemas/user.schema';
 import { City, CitySchema } from 'src/cities/schemas/city.schema';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   controllers: [HotelsController],
   providers: [HotelsService],
   imports: [
+    ConfigModule.forRoot({ envFilePath: '.env' }),
     MongooseModule.forFeature([
       { name: Hotel.name, schema: HotelSchema },
       { name: Location.name, schema: LocationSchema },
