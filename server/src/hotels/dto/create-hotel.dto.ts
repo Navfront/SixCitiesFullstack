@@ -34,10 +34,10 @@ export class CreateHotelDto {
   @IsBoolean({ message: 'isPremium - boolean' })
   readonly is_premium: boolean;
 
-  @IsObject({ message: 'location - object {latitude / logitude / zoom}' })
+  @IsObject({ message: 'location - object {latitude / longitude / zoom}' })
   readonly location: {
     readonly latitude: number;
-    readonly logitude: number;
+    readonly longitude: number;
     readonly zoom: number;
   };
 

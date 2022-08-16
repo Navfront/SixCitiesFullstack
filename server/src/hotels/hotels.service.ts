@@ -18,9 +18,47 @@ export class HotelsService {
   ) {}
 
   async create(createHotelDto: CreateHotelDto, req: ReqUser) {
-    const location = await this.locationModel.create(createHotelDto.location);
+    const locCondidate = await this.locationModel.findOne({
+      latitude: createHotelDto.location.latitude,
+      longitude: createHotelDto.location.longitude,
+    });
+
+    const location =
+      locCondidate ||
+      (await this.locationModel.create(createHotelDto.location));
+    if (!location) {
+      throw new HttpException(
+        `Не удалось создать location ${createHotelDto.location}`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const user = await this.userModel.findById(req.user.userId);
+    if (!user) {
+      throw new HttpException(
+        `Нет такого userId! ${req.user.userId}`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     const city = await this.cityModel.findById(createHotelDto.city);
+    if (!city) {
+      throw new HttpException(
+        `Нет такого города! ${createHotelDto.city}`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const hotelCondidate = await this.hotelModel.findOne({
+      ...createHotelDto,
+      host: user._id,
+      location: location._id,
+      city: city._id,
+    });
+    if (hotelCondidate) {
+      throw new HttpException(
+        `Такой hotel уже есть ${createHotelDto.title}`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     const hotel = await this.hotelModel.create({
       ...createHotelDto,
       host: user._id,
@@ -28,9 +66,10 @@ export class HotelsService {
       city: city._id,
     });
     location.hotelId = hotel._id;
-    location.save();
     console.log(`Post new hotel: ${hotel._id}`);
     city.hotels.push(hotel);
+
+    location.save();
     city.save();
     return hotel;
   }
