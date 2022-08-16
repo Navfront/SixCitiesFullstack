@@ -7,6 +7,7 @@ import {
   ValidationPipe,
   UsePipes,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { HotelsService } from './hotels.service';
 import { CreateHotelDto } from './dto/create-hotel.dto';
@@ -22,8 +23,8 @@ export class HotelsController {
   @ApiOperation({ summary: 'Новый отель' })
   @UsePipes(ValidationPipe)
   @Post()
-  create(@Body() createHotelDto: CreateHotelDto) {
-    return this.hotelsService.create(createHotelDto);
+  create(@Body() createHotelDto: CreateHotelDto, @Request() req) {
+    return this.hotelsService.create(createHotelDto, req);
   }
 
   @Get('/city/:id')

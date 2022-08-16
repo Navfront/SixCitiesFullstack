@@ -15,6 +15,12 @@ export class User {
   password: string;
 
   @Prop()
+  avatar_url: string;
+
+  @Prop()
+  is_pro: boolean;
+
+  @Prop()
   role: string;
 }
 

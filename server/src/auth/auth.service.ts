@@ -28,6 +28,8 @@ export class AuthService {
             process.env.ADMIN_PASSWORD ||
             '$2b$05$x9RcJi6OtRY14/w/BMP1Aexs89OjsmXmlIvtq6QC0ikYIpxFg2aaK',
           username: 'Admin',
+          is_pro: true,
+          avatar_url: '',
           role: 'admin',
         });
         console.log('Created new admin');
@@ -54,12 +56,13 @@ export class AuthService {
     }
 
     const hashPassword = await bcrypt.hash(userDto.password, 5);
-    console.log(hashPassword);
 
     const user = await this.userModel.create({
       ...userDto,
       password: hashPassword,
       role: 'user',
+      is_pro: false,
+      avatar_url: '',
     });
 
     if (user) {
@@ -70,8 +73,8 @@ export class AuthService {
   }
 
   // Генерируем токен по имени и ид пользователя
-  private async generateToken(username: string, userId: string, role: string) {
-    const payload = { username, userId, role };
+  private async generateToken(email: string, userId: string, role: string) {
+    const payload = { email, userId, role };
     return {
       token: this.jwtService.sign(payload, {
         secret: process.env.SECRET || 'secret',

@@ -4,12 +4,18 @@ import { HotelsController } from './hotels.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Hotel, HotelSchema } from './schemas/hotel.schema';
+import { Location, LocationSchema } from 'src/cities/schemas/location.schema';
+import { User, UserSchema } from 'src/users/schemas/user.schema';
 
 @Module({
   controllers: [HotelsController],
   providers: [HotelsService],
   imports: [
-    MongooseModule.forFeature([{ name: Hotel.name, schema: HotelSchema }]),
+    MongooseModule.forFeature([
+      { name: Hotel.name, schema: HotelSchema },
+      { name: Location.name, schema: LocationSchema },
+      { name: User.name, schema: UserSchema },
+    ]),
     JwtModule.register({
       privateKey: process.env.SECRET || 'secret',
       signOptions: {

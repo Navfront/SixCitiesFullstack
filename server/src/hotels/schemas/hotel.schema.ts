@@ -18,7 +18,7 @@ export class Hotel {
   description: string;
 
   @Prop({ required: true })
-  foods: string[];
+  goods: string[];
 
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
   host: User;

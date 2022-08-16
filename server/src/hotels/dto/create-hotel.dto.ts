@@ -1,6 +1,7 @@
 import {
   IsArray,
   IsBoolean,
+  IsNotEmpty,
   IsNumber,
   IsObject,
   IsString,
@@ -10,15 +11,9 @@ export class CreateHotelDto {
   @IsNumber()
   readonly bedrooms: number;
 
-  @IsObject({ message: 'city - obj with {location, name}' })
-  readonly city: {
-    readonly location: {
-      readonly latitude: number;
-      readonly logitude: number;
-      readonly zoom: number;
-    };
-    name: string;
-  };
+  @IsString({ message: 'city - cityId string' })
+  @IsNotEmpty()
+  readonly city: string;
 
   @IsString({ message: 'description - string' })
   readonly description: string;
@@ -26,13 +21,9 @@ export class CreateHotelDto {
   @IsArray({ message: 'goods - array strings' })
   readonly goods: string[];
 
-  @IsObject({ message: 'host - obj avatar_url / id / is_pro / name' })
-  readonly host: {
-    readonly avatar_url: string;
-    readonly id: string;
-    readonly is_pro: boolean;
-    readonly name: string;
-  };
+  @IsString({ message: 'host - userId string' })
+  @IsNotEmpty()
+  readonly host: string;
 
   @IsArray({ message: 'images - array strings' })
   readonly images: string[];
@@ -43,7 +34,7 @@ export class CreateHotelDto {
   @IsBoolean({ message: 'isPremium - boolean' })
   readonly is_premium: boolean;
 
-  @IsObject({ message: 'location - obj latitude / logitude / zoom' })
+  @IsObject({ message: 'location - object {latitude / logitude / zoom}' })
   readonly location: {
     readonly latitude: number;
     readonly logitude: number;

@@ -6,14 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
-
-export type ReqUser = {
-  username: string;
-  userId: string;
-  iat: number;
-  exp: number;
-};
+import { ReqUser } from 'src/auth/jwt-auth.guard';
 
 @Injectable()
 export class IsAdminGuard implements CanActivate {
@@ -22,9 +15,7 @@ export class IsAdminGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const req: Request & { user: ReqUser } = context
-      .switchToHttp()
-      .getRequest();
+    const req: ReqUser = context.switchToHttp().getRequest();
     try {
       const authHeader = req.headers.authorization;
       const bearer = authHeader.split(' ')[0];

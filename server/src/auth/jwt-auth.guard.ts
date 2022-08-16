@@ -8,12 +8,14 @@ import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
-export type ReqUser = {
+type User = {
   username: string;
   userId: string;
   iat: number;
   exp: number;
 };
+
+export type ReqUser = Request & { user: User };
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -22,9 +24,7 @@ export class JwtAuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const req: Request & { user: ReqUser } = context
-      .switchToHttp()
-      .getRequest();
+    const req: ReqUser = context.switchToHttp().getRequest();
     try {
       const authHeader = req.headers.authorization;
       const bearer = authHeader.split(' ')[0];
