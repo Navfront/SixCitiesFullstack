@@ -23,8 +23,8 @@ export class HotelsController {
   @ApiOperation({ summary: 'Новый отель' })
   @UsePipes(ValidationPipe)
   @Post()
-  create(@Body() createHotelDto: CreateHotelDto, @Request() req) {
-    return this.hotelsService.create(createHotelDto, req);
+  async create(@Body() createHotelDto: CreateHotelDto, @Request() req) {
+    return await this.hotelsService.create(createHotelDto, req);
   }
 
   @Get('/city/:id')

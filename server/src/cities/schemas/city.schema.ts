@@ -10,11 +10,11 @@ export class City {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'Location' })
+  @Prop({ type: Types.ObjectId, ref: 'Location', required: true })
   location: Location;
 
-  @Prop({ type: Types.Array })
-  hotels: Hotel[];
+  @Prop([Hotel])
+  hotels: [Hotel];
 }
 
 // city: {

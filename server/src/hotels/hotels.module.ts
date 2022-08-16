@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Hotel, HotelSchema } from './schemas/hotel.schema';
 import { Location, LocationSchema } from 'src/cities/schemas/location.schema';
 import { User, UserSchema } from 'src/users/schemas/user.schema';
+import { City, CitySchema } from 'src/cities/schemas/city.schema';
 
 @Module({
   controllers: [HotelsController],
@@ -15,6 +16,7 @@ import { User, UserSchema } from 'src/users/schemas/user.schema';
       { name: Hotel.name, schema: HotelSchema },
       { name: Location.name, schema: LocationSchema },
       { name: User.name, schema: UserSchema },
+      { name: City.name, schema: CitySchema },
     ]),
     JwtModule.register({
       privateKey: process.env.SECRET || 'secret',

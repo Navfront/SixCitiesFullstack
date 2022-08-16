@@ -26,6 +26,7 @@ export class CitiesService {
       return await this.cityModel.create({
         name: createCityDto.name,
         location: location._id,
+        hotels: [],
       });
   }
 
