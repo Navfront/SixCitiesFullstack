@@ -31,6 +31,7 @@ export class AuthService {
           is_pro: true,
           avatar_url: '',
           role: 'admin',
+          favorites: [],
         });
         console.log('Created new admin');
       } else {
@@ -63,6 +64,7 @@ export class AuthService {
       role: 'user',
       is_pro: false,
       avatar_url: '',
+      favorites: [],
     });
 
     if (user) {

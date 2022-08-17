@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, ObjectId, Types } from 'mongoose';
+import { City } from 'src/cities/schemas/city.schema';
+import { Hotel } from 'src/hotels/schemas/hotel.schema';
 
 export type UserDocument = User & Document;
 
@@ -22,6 +24,9 @@ export class User {
 
   @Prop()
   role: string;
+
+  @Prop([{ type: Types.ObjectId, ref: 'Hotel' }])
+  favorites: Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

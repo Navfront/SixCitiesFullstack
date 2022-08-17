@@ -10,6 +10,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { HotelsModule } from './hotels/hotels.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { CitiesModule } from './cities/cities.module';
+import { FavoritesModule } from './favorites/favorites.module';
 
 @Module({
   controllers: [AppController],
@@ -31,6 +32,7 @@ import { CitiesModule } from './cities/cities.module';
     HotelsModule,
     ReviewsModule,
     CitiesModule,
+    FavoritesModule,
   ],
 })
 export class AppModule {}
