@@ -8,6 +8,8 @@ import { User, UserDocument } from 'src/users/schemas/user.schema';
 import { CreateHotelDto } from './dto/create-hotel.dto';
 import { Hotel, HotelDocument } from './schemas/hotel.schema';
 
+const LONG_OF_NEARBY = 30;
+
 @Injectable()
 export class HotelsService {
   constructor(
@@ -74,16 +76,37 @@ export class HotelsService {
     return hotel;
   }
 
-  findAllByCityId(id: string) {
-    const result = this.hotelModel.find({ city: id });
+  async findAllByCityId(id: string) {
+    const result = await this.hotelModel.find({ city: id });
     if (!result) {
       throw new HttpException('Такого города нет!', HttpStatus.NOT_FOUND);
     }
     return result;
   }
 
-  findOne(id: string) {
-    const result = this.hotelModel.findById(id);
+  async findAllNearBy(id: string) {
+    const target = await this.hotelModel.findById(id);
+    if (!target) {
+      throw new HttpException('Такого hotel нет!', HttpStatus.NOT_FOUND);
+    }
+
+    const hotelLatitude = (hotel: Hotel) => hotel.city.location.latitude;
+    const hotelLongtitude = (hotel: Hotel) => hotel.city.location.longitude;
+
+    const hotels = await this.hotelModel.find({ city: target.city.name });
+    const result = hotels.filter(
+      (hotel) =>
+        Math.abs(hotelLatitude(target) - hotelLatitude(hotel)) <=
+          LONG_OF_NEARBY &&
+        Math.abs(hotelLongtitude(target) - hotelLongtitude(hotel)) <=
+          LONG_OF_NEARBY,
+    );
+
+    return result;
+  }
+
+  async findOne(id: string) {
+    const result = await this.hotelModel.findById(id);
     if (!result) {
       throw new HttpException('Такого отеля нет!', HttpStatus.NOT_FOUND);
     }

@@ -27,6 +27,11 @@ export class HotelsController {
     return await this.hotelsService.create(createHotelDto, req);
   }
 
+  @Get('/:id/nearby')
+  async findAllNearBy(@Param('id') id: string) {
+    return await this.hotelsService.findAllNearBy(id);
+  }
+
   @Get('/city/:id')
   async findAllByCityId(@Param('id') id: string) {
     return await this.hotelsService.findAllByCityId(id);
