@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { Model } from 'mongoose';
 import { Hotel, HotelDocument } from 'src/hotels/schemas/hotel.schema';
 import { ReqUser } from 'src/auth/jwt-auth.guard';
 import { User, UserDocument } from 'src/users/schemas/user.schema';

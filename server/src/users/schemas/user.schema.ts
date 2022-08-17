@@ -1,7 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, ObjectId, Types } from 'mongoose';
-import { City } from 'src/cities/schemas/city.schema';
-import { Hotel } from 'src/hotels/schemas/hotel.schema';
+import { Document, Types } from 'mongoose';
 
 export type UserDocument = User & Document;
 
