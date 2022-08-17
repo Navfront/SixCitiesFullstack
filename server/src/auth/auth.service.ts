@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './../users/dto/create-user.dto';
-import { UsersService } from './../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from 'src/users/schemas/user.schema';
@@ -17,7 +16,6 @@ import { LoginUserDto } from 'src/users/dto/login-user.dto';
 export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
-    private userService: UsersService,
     private jwtService: JwtService,
   ) {
     userModel.findOne({ email: 'ya@ya.ru' }).then((admin) => {

@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CitiesService } from './cities.service';
 import { CreateCityDto } from './dto/create-city.dto';
 
@@ -6,10 +14,10 @@ import { CreateCityDto } from './dto/create-city.dto';
 export class CitiesController {
   constructor(private readonly citiesService: CitiesService) {}
 
+  @UsePipes(ValidationPipe)
   @Post()
   async create(@Body() createCityDto: CreateCityDto) {
     console.log('create city', createCityDto.name);
-
     return await this.citiesService.create(createCityDto);
   }
 

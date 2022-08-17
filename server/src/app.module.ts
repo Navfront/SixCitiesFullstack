@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { TodosModule } from './todos/todos.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -19,7 +18,7 @@ import { FavoritesModule } from './favorites/favorites.module';
     MongooseModule.forRoot(
       process.env.MONGO || 'mongodb://localhost:27017/sixcities',
     ),
-    // ConfigModule.forRoot({ envFilePath: '.env' }),
+    ConfigModule.forRoot({ envFilePath: '.env' }),
     JwtModule.register({
       secret: process.env.SECRET || 'secret',
       signOptions: {
@@ -28,7 +27,6 @@ import { FavoritesModule } from './favorites/favorites.module';
     }),
     AuthModule,
     UsersModule,
-    TodosModule,
     HotelsModule,
     ReviewsModule,
     CitiesModule,
