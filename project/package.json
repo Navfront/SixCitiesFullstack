@@ -19,7 +19,6 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.8",
     "redux-thunk": "^2.4.1",
-    "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -47,6 +46,14 @@
     ]
   },
   "devDependencies": {
-    "@types/leaflet": "^1.7.11"
+    "@types/leaflet": "^1.7.11",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "eslint": "^8.22.0",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.1",
+    "typescript": "^4.7.4"
   }
 }
