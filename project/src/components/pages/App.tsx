@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import logo from "../../logo.svg";
+import "../../App.css";
+import { Link } from "react-router-dom";
 
 
 const URL = process.env.REACT_APP_SURV || "https://sixcities.navfront.ru/api/"
@@ -45,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link>
         <h1>My db knows {clicks.length} clicks!</h1>
         <p style={{color: "lightblue"}}>Last clicks:</p>
         {clicks.slice(clicks.length - 5, clicks.length).map((cl) => {
