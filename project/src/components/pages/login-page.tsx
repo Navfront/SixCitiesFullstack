@@ -1,6 +1,9 @@
-
+import { Helmet } from 'react-helmet'
 export default function LoginPage (): JSX.Element {
   return (
+    <>        <Helmet>
+    <title>SixCities: authorization</title>
+    </Helmet>
     <div className="page page--gray page--login">
       <header className="header">
         <div className="container">
@@ -40,5 +43,7 @@ export default function LoginPage (): JSX.Element {
         </div>
       </main>
     </div>
+    </>
+
   )
 }
