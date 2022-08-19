@@ -43,7 +43,7 @@ function App (): JSX.Element {
   return (
     <div className="App">
       <header className="App-header">
-        <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link>
+        <Link to="/admin"><img src={logo} className="App-logo" alt="logo" /></Link>
         <h1>My db knows {clicks.length} clicks!</h1>
         <p style={{ color: 'lightblue' }}>Last clicks:</p>
         {clicks.slice(clicks.length - 5, clicks.length).map((cl) => {
