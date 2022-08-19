@@ -1,5 +1,5 @@
 {
-  "name": "project",
+  "name": "sixcities-project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -26,13 +26,21 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+
+  }
+
+  ,
+  "prettier":{
+    "singleQuote": true
   },
   "browserslist": {
     "production": [
@@ -51,11 +59,14 @@
     "@types/react-helmet": "^6.1.5",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard-with-typescript": "^22.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.30.1",
+    "prettier": "2.7.1",
     "typescript": "^4.7.4"
   }
 }
