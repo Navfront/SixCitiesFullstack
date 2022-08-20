@@ -1,12 +1,24 @@
-import useValidate, { InputTypes } from './../../../hooks/useValidate';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react';
+import useValidate, { InputTypes } from '../../../hooks/use-validate';
+import useSubmit from './../../../hooks/use-submit';
 
 export default function SignInFrom(): JSX.Element {
   const { value: emailValue, onChangeHandler: emailChangeHandler } =
     useValidate(InputTypes.email);
   const { value: passwordValue, onChangeHandler: passwordChangeHandler } =
     useValidate(InputTypes.password);
+  const formRef = React.createRef<HTMLFormElement>();
+  const { onSubmitHandler } = useSubmit(formRef);
+
   return (
-    <form className="login__form form" action="#" method="post">
+    <form
+      onSubmit={onSubmitHandler}
+      ref={formRef}
+      className="login__form form"
+      action="#"
+      method="post"
+    >
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">E-mail</label>
         <input
