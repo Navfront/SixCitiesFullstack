@@ -36,6 +36,8 @@ export const fetchLoginIn = (formData: any) => {
         );
       }
     } catch (_e) {
+      console.log(_e);
+
       const result = _e as RespError;
       toast(result?.response.data.message);
     }

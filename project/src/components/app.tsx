@@ -4,6 +4,10 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
+import AdminPage from './pages/admin-page';
+import WithPrivate from '../hocs/with-private';
+import MainPage from './pages/main-page';
+
 export default function App(): JSX.Element {
   return (
     <HelmetProvider>
@@ -13,7 +17,17 @@ export default function App(): JSX.Element {
       <ToastContainer newestOnTop hideProgressBar />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="login" element={<LoginPage />} />
+
+          <Route
+            path="admin"
+            element={
+              <WithPrivate>
+                <AdminPage />
+              </WithPrivate>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
