@@ -1,4 +1,9 @@
+import useValidate from './../../../hooks/useValidate';
+
 export default function SignInFrom(): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { value, onChangeHandler } = useValidate();
+
   return (
     <form className="login__form form" action="#" method="post">
       <div className="login__input-wrapper form__input-wrapper">
@@ -8,6 +13,9 @@ export default function SignInFrom(): JSX.Element {
           type="email"
           name="email"
           placeholder="Email"
+          onChange={onChangeHandler}
+          value={value}
+          autoComplete="true"
           required
         />
       </div>
@@ -18,6 +26,7 @@ export default function SignInFrom(): JSX.Element {
           type="password"
           name="password"
           placeholder="Password"
+          autoComplete="true"
           required
         />
       </div>
