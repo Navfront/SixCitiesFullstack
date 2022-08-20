@@ -14,10 +14,13 @@ export const authSlice = createSlice({
     changeState: (state, action) => {
       state = action.payload;
     },
+    resetState: (state) => {
+      state = { isAuth: false, isAdmin: false, token: '' };
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { changeState, changeToken } = authSlice.actions;
+export const { changeState, changeToken, resetState } = authSlice.actions;
 
 export default authSlice.reducer;

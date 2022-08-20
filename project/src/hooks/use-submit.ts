@@ -1,24 +1,15 @@
 import { FormEvent } from 'react';
+import { useAppDispatch } from './../redux/redux-hooks';
+import { fetchLoginIn } from './../redux/thunks/login-thunk';
 
 interface UseSubmitReturn {
   onSubmitHandler: (evt: FormEvent<HTMLFormElement>) => void;
 }
 
-const fetchSubmit = async (obj: any): Promise<string | string[]> => {
-  const result = await fetch('http://localhost:5500/login', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  });
-  return await result.json();
-};
-
 export default function useSubmit(
   formElement: React.RefObject<HTMLFormElement>
 ): UseSubmitReturn {
+  const dispatch = useAppDispatch();
   const onSubmitHandler = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
     if (formElement.current != null) {
@@ -30,9 +21,7 @@ export default function useSubmit(
         obj[key] = value;
       });
       console.log('submiting', obj);
-      fetchSubmit(obj)
-        .then((res) => console.log(res))
-        .catch((e) => console.log(e));
+      void dispatch(fetchLoginIn(obj));
     }
   };
 
