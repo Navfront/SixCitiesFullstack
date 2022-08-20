@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import SignInFrom from '../ui/sign-in/sign-in-form';
 export default function LoginPage(): JSX.Element {
   return (
