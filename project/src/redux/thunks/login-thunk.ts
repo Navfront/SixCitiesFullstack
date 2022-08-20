@@ -1,7 +1,8 @@
 import { Action } from '@reduxjs/toolkit';
 import { Dispatch } from 'react';
-import { changeToken } from '../reducers/authSlice';
+import { changeState } from '../reducers/authSlice';
 import { RootState } from '../store';
+import Cookies from 'js-cookie';
 
 export type RespError = Error & {
   response: {
@@ -21,8 +22,17 @@ export const fetchLoginIn = (formData: any) => {
     try {
       const response = await serviceApi.loginIn(formData);
       console.log(response.data);
-      if (response?.data?.token.length > 0) {
-        dispatch(changeToken({ token: response.data.token }));
+      if (response.data.token.length > 0) {
+        Cookies.set('token', response.data.token, {
+          expires: (1 / 24 / 60) * 5, // 5 min
+        });
+        dispatch(
+          changeState({
+            isAuth: true,
+            isAdmin: false,
+            token: response.data.token,
+          })
+        );
       }
     } catch (_e) {
       const result = _e as RespError;
