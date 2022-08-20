@@ -7,7 +7,7 @@ export default function MainPage(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to="/admin" className="header__logo-link">
+              <Link to="admin" className="header__logo-link">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
