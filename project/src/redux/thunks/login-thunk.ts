@@ -3,6 +3,7 @@ import { Dispatch } from 'react';
 import { changeState } from '../reducers/authSlice';
 import { RootState } from '../store';
 import Cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 
 export type RespError = Error & {
   response: {
@@ -36,7 +37,7 @@ export const fetchLoginIn = (formData: any) => {
       }
     } catch (_e) {
       const result = _e as RespError;
-      console.log(result?.response.data.message);
+      toast(result?.response.data.message);
     }
   };
 };
