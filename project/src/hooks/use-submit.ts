@@ -1,6 +1,7 @@
 import { FormEvent } from 'react';
 import { useAppDispatch } from './../redux/redux-hooks';
 import { fetchLoginIn } from './../redux/thunks/login-thunk';
+import { useNavigate } from 'react-router-dom';
 
 interface UseSubmitReturn {
   onSubmitHandler: (evt: FormEvent<HTMLFormElement>) => void;
@@ -10,6 +11,7 @@ export default function useSubmit(
   formElement: React.RefObject<HTMLFormElement>
 ): UseSubmitReturn {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const onSubmitHandler = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
     if (formElement.current != null) {
@@ -20,8 +22,8 @@ export default function useSubmit(
         const [key, value] = iterator.next().value as [string, string];
         obj[key] = value;
       });
-      console.log('submiting', obj);
       void dispatch(fetchLoginIn(obj));
+      navigate(-1);
     }
   };
 

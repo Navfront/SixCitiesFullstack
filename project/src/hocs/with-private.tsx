@@ -7,7 +7,9 @@ export default function WithPrivate({
 }: PropsWithChildren): JSX.Element {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
 
-  const element = isAuth ? children : <Navigate to="/login" />;
+  if (!isAuth) {
+    return <Navigate to="/login" />;
+  }
 
-  return <>{element}</>;
+  return <>{children}</>;
 }

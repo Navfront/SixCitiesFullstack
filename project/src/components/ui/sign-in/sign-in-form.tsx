@@ -42,6 +42,7 @@ export default function SignInFrom(): JSX.Element {
           autoComplete="true"
           value={passwordValue}
           onChange={passwordChangeHandler}
+          onClick={(e) => e.preventDefault()}
           required
         />
       </div>
