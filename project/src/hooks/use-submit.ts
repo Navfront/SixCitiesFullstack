@@ -1,7 +1,7 @@
 import { FormEvent } from 'react';
 import { useAppDispatch } from './../redux/redux-hooks';
 import { fetchLoginIn } from './../redux/thunks/login-thunk';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface UseSubmitReturn {
   onSubmitHandler: (evt: FormEvent<HTMLFormElement>) => void;
@@ -12,6 +12,10 @@ export default function useSubmit(
 ): UseSubmitReturn {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const loc = useLocation().state as { from: { pathname: string } };
+  const from = loc?.from?.pathname;
+  console.log('from', from);
+
   const onSubmitHandler = (evt: FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
     if (formElement.current != null) {
@@ -23,7 +27,7 @@ export default function useSubmit(
         obj[key] = value;
       });
       void dispatch(fetchLoginIn(obj));
-      navigate(-1);
+      navigate(from, { replace: true });
     }
   };
 
