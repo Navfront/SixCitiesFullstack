@@ -1,9 +1,10 @@
-import useValidate from './../../../hooks/useValidate';
+import useValidate, { InputTypes } from './../../../hooks/useValidate';
 
 export default function SignInFrom(): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { value, onChangeHandler } = useValidate();
-
+  const { value: emailValue, onChangeHandler: emailChangeHandler } =
+    useValidate(InputTypes.email);
+  const { value: passwordValue, onChangeHandler: passwordChangeHandler } =
+    useValidate(InputTypes.password);
   return (
     <form className="login__form form" action="#" method="post">
       <div className="login__input-wrapper form__input-wrapper">
@@ -13,8 +14,8 @@ export default function SignInFrom(): JSX.Element {
           type="email"
           name="email"
           placeholder="Email"
-          onChange={onChangeHandler}
-          value={value}
+          onChange={emailChangeHandler}
+          value={emailValue}
           autoComplete="true"
           required
         />
@@ -27,6 +28,8 @@ export default function SignInFrom(): JSX.Element {
           name="password"
           placeholder="Password"
           autoComplete="true"
+          value={passwordValue}
+          onChange={passwordChangeHandler}
           required
         />
       </div>
