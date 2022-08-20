@@ -16,7 +16,9 @@ export default function useSubmit(
   const from = loc?.from?.pathname;
   console.log('from', from);
 
-  const onSubmitHandler = (evt: FormEvent<HTMLFormElement>): void => {
+  const onSubmitHandler = async (
+    evt: FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     evt.preventDefault();
     if (formElement.current != null) {
       const data = new FormData(formElement.current);
@@ -27,11 +29,19 @@ export default function useSubmit(
         obj[key] = value;
       });
       void dispatch(fetchLoginIn(obj));
-      navigate(from, { replace: true });
+      // ---------fckgtimeout---------
+      await new Promise<void>((resolve) => {
+        setTimeout(() => {
+          resolve();
+          navigate(from, { replace: true });
+        }, 300);
+      });
+      // ---------fckgtimeout---------
     }
   };
 
   return {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onSubmitHandler,
   };
 }
