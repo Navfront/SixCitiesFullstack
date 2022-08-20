@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import Cookies from 'js-cookie';
 export default class ServiceApi {
   private readonly axiosInstance;
 
@@ -9,8 +9,17 @@ export default class ServiceApi {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        Authorization: this.getBearer(),
       },
     });
+  }
+
+  private getBearer(): string {
+    const token = Cookies.get('token');
+    if (token != null) {
+      return `Bearer ${token}`;
+    }
+    return '';
   }
 
   async loginIn(body: any): Promise<string | string[]> {
