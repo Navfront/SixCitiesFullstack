@@ -3,7 +3,7 @@ import React from 'react';
 import useValidate, { InputTypes } from '../../../hooks/use-validate';
 import useSubmit from './../../../hooks/use-submit';
 
-export default function SignInFrom(): JSX.Element {
+function SignInFrom(): JSX.Element {
   const { value: emailValue, onChangeHandler: emailChangeHandler } =
     useValidate(InputTypes.email);
   const { value: passwordValue, onChangeHandler: passwordChangeHandler } =
@@ -42,7 +42,6 @@ export default function SignInFrom(): JSX.Element {
           autoComplete="true"
           value={passwordValue}
           onChange={passwordChangeHandler}
-          onClick={(e) => e.preventDefault()}
           required
         />
       </div>
@@ -52,3 +51,5 @@ export default function SignInFrom(): JSX.Element {
     </form>
   );
 }
+
+export default React.memo(SignInFrom);
