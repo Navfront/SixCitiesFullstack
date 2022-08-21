@@ -38,7 +38,7 @@ export default function AdminCitiesForm(): JSX.Element {
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Уровень приближения
-                <FormInput type={'text'} name="zoom" placeholder="8" />
+                <FormInput type={'number'} name="zoom" placeholder="8" />
               </label>
             </div>
           </form>
