@@ -1,21 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { City } from '../../../../types/city';
+import { useAppSelector } from '../../../redux/redux-hooks';
 import FormInput from '../inputs/form-input';
 import style from './style.module.css';
-import ServiceApi from './../../../api/service-api';
 
 function AdminHotelsForm(): JSX.Element {
-  // const [cities, setCities] = useState([]);
-  useEffect(() => {
-    console.log('render!');
-
-    const serviceApi = new ServiceApi(process.env.REACT_APP_SURV as string);
-    try {
-      const result = serviceApi.getCities();
-      result.then((res) => console.log(res)).catch((e) => e);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  const cities = useAppSelector((state) => state.cities.cities as City[]);
+  console.log(cities);
 
   return (
     <>
@@ -29,9 +20,11 @@ function AdminHotelsForm(): JSX.Element {
               <label className={style.label}>
                 Город
                 <select name="city" className={style.select}>
-                  <option value="0">Parent Tag</option>
-                  <option value="1">Child Tag</option>
-                  <option value="2">Child Tag</option>
+                  {cities.map((city) => (
+                    <option key={city._id} value={city._id}>
+                      {city.name}
+                    </option>
+                  ))}
                 </select>
               </label>
             </div>
