@@ -5,6 +5,8 @@ import { RootState } from '../store';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
+const EXP_TIME = (1 / 24 / 60) * 5; // 5 min
+
 export type RespError = Error & {
   response: {
     data: {
@@ -25,13 +27,24 @@ export const fetchLoginIn = (formData: any) => {
       console.log(response.data);
       if (response.data.token.length > 0) {
         Cookies.set('token', response.data.token, {
-          expires: (1 / 24 / 60) * 5, // 5 min
+          expires: EXP_TIME,
+        });
+        Cookies.set('username', response.data.username, {
+          expires: EXP_TIME,
+        });
+        Cookies.set('role', response.data.role, {
+          expires: EXP_TIME,
+        });
+        Cookies.set('email', response.data.email, {
+          expires: EXP_TIME,
         });
         dispatch(
           changeState({
             isAuth: true,
-            isAdmin: false,
+            isAdmin: response.data.role === 'admin',
             token: response.data.token,
+            username: response.data.username,
+            email: response.data.email,
           })
         );
       }

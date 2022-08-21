@@ -6,7 +6,7 @@ import { useAppDispatch } from './../../../redux/redux-hooks';
 import { resetState } from '../../../redux/reducers/auth-slice';
 
 function HeaderNav(): JSX.Element {
-  const isAuth = useAppSelector((state) => state.auth.isAuth);
+  const { isAuth, email, isAdmin } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   return (
     <nav className="header__nav">
@@ -19,11 +19,18 @@ function HeaderNav(): JSX.Element {
                 className="header__nav-link header__nav-link--profile"
               >
                 <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                <span className="header__user-name user__name">
-                  Oliver.conner@gmail.com
-                </span>
+                <span className="header__user-name user__name">{email}</span>
               </Link>
             </li>
+            {isAdmin ? (
+              <li className="header__nav-item">
+                <Link to="/admin/city">
+                  <span>Админка</span>
+                </Link>
+              </li>
+            ) : (
+              ' '
+            )}
             <li className="header__nav-item">
               <button
                 className={style.resetBtn + ' header__nav-link'}
