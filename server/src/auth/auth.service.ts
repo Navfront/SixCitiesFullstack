@@ -41,7 +41,15 @@ export class AuthService {
   // Проверяем пользователя и отдаем токен
   async login(userDto: LoginUserDto) {
     const user = await this.validateUser({ ...userDto, username: '' });
-    return this.generateToken(user.email, user._id, user.role);
+    const result = {
+      ...(await this.generateToken(user.email, user._id, user.role)),
+      userId: user._id,
+      email: user.email,
+      username: user.username,
+      role: user.role,
+    };
+
+    return result;
   }
 
   // Регистрируем нового пользователя и отдаем токен
@@ -66,7 +74,15 @@ export class AuthService {
     });
 
     if (user) {
-      return this.generateToken(user.email, user._id, user.role);
+      const result = {
+        ...(await this.generateToken(user.email, user._id, user.role)),
+        userId: user._id,
+        email: user.email,
+        username: user.username,
+        role: user.role,
+      };
+
+      return result;
     }
 
     throw new HttpException('Ошибка сервера', HttpStatus.INTERNAL_SERVER_ERROR);
