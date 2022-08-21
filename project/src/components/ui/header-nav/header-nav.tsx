@@ -2,9 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../redux/redux-hooks';
 import style from './style.module.css';
+import { useAppDispatch } from './../../../redux/redux-hooks';
+import { resetState } from '../../../redux/reducers/authSlice';
 
 function HeaderNav(): JSX.Element {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
+  const dispatch = useAppDispatch();
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -22,7 +25,12 @@ function HeaderNav(): JSX.Element {
               </Link>
             </li>
             <li className="header__nav-item">
-              <button className={style.resetBtn + ' header__nav-link'}>
+              <button
+                className={style.resetBtn + ' header__nav-link'}
+                onClick={() => {
+                  dispatch(resetState());
+                }}
+              >
                 <span className="header__signout">Sign out</span>
               </button>
             </li>

@@ -17,7 +17,9 @@ export const authSlice = createSlice({
       state.token = action.payload.token;
     },
     resetState: (state) => {
-      state = { isAuth: false, isAdmin: false, token: '' };
+      state.isAdmin = false;
+      state.isAuth = false;
+      state.token = '';
     },
   },
 });

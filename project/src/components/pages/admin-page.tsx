@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import HeaderNav from '../ui/header-nav/header-nav';
 
 export default function AdminPage(): JSX.Element {
   return (
@@ -12,15 +12,7 @@ export default function AdminPage(): JSX.Element {
           <div className="container">
             <div className="header__wrapper">
               <div className="header__left">
-                <Link to="/" className="header__logo-link">
-                  <img
-                    className="header__logo"
-                    src="img/logo.svg"
-                    alt="6 cities logo"
-                    width="81"
-                    height="41"
-                  />
-                </Link>
+                <HeaderNav />
               </div>
             </div>
           </div>

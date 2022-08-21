@@ -13,7 +13,7 @@ export default function useSubmit(
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const loc = useLocation().state as { from: { pathname: string } };
-  const from = loc?.from?.pathname;
+  const from = loc?.from?.pathname ?? '/';
   console.log('from', from);
 
   const onSubmitHandler = async (
