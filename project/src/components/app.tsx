@@ -17,7 +17,7 @@ export default function App(): JSX.Element {
       <ToastContainer newestOnTop hideProgressBar />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route index element={<MainPage />} />
           <Route path="login" element={<LoginPage />} />
           <Route
             path="admin"
@@ -26,7 +26,11 @@ export default function App(): JSX.Element {
                 <AdminPage />
               </WithPrivate>
             }
-          />
+          >
+            <Route path="city" element={<p>city</p>} />
+            <Route path="hotel" element={<p>hotel</p>} />
+            <Route path="review" element={<p>review</p>} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
