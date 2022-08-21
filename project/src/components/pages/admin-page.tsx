@@ -1,11 +1,17 @@
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import WithActiveLink from '../../hocs/with-active-link';
 import HeaderNav from '../ui/header-nav/header-nav';
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
+import { fetchGetCities } from '../../redux/thunks/get-cities-thunk';
+import { useAppDispatch } from '../../redux/redux-hooks';
 
 export default function AdminPage(): JSX.Element {
-  const loc = useLocation();
-  console.log(loc.pathname.split('/')[2]);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(fetchGetCities());
+  }, []);
 
   return (
     <>

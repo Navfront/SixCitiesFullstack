@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../redux/redux-hooks';
 import style from './style.module.css';
 import { useAppDispatch } from './../../../redux/redux-hooks';
-import { resetState } from '../../../redux/reducers/authSlice';
+import { resetState } from '../../../redux/reducers/auth-slice';
 
 function HeaderNav(): JSX.Element {
   const isAuth = useAppSelector((state) => state.auth.isAuth);

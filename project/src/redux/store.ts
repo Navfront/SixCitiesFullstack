@@ -1,12 +1,15 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import ServiceApi from '../api/service-api';
-import authSlice from './reducers/authSlice';
+import authSlice from './reducers/auth-slice';
+import citySlice from './reducers/city-slice';
+
+const rootReducer = combineReducers({
+  auth: authSlice,
+  cities: citySlice,
+});
 
 export const store = configureStore({
-  devTools: false,
-  reducer: {
-    auth: authSlice,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {

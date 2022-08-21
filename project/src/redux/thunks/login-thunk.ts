@@ -1,6 +1,6 @@
 import { Action } from '@reduxjs/toolkit';
 import { Dispatch } from 'react';
-import { changeState } from '../reducers/authSlice';
+import { changeState } from '../reducers/auth-slice';
 import { RootState } from '../store';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
