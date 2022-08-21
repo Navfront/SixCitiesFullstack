@@ -1,6 +1,9 @@
 import FormInput from '../inputs/form-input';
+import useSubmitCity from './../../../hooks/use-submit-city';
 
 export default function AdminCitiesForm(): JSX.Element {
+  const { onSubmitHandler } = useSubmitCity();
+
   return (
     <>
       <h2 className="visually-hidden">Create city</h2>
@@ -8,18 +11,22 @@ export default function AdminCitiesForm(): JSX.Element {
 
       <div className="cities__places-list places__list tabs__content">
         <article className="cities__place-card">
-          <form action="#" className="login__form form">
+          <form
+            action="#"
+            className="login__form form"
+            onSubmit={onSubmitHandler}
+          >
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Название города
-                <FormInput type={'text'} name="name" placeholder="Amsterdam" />
+                <FormInput type="text" name="name" placeholder="Amsterdam" />
               </label>
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Широта
                 <FormInput
-                  type={'text'}
+                  type="text"
                   name="latitude"
                   placeholder="52.370216"
                 />
@@ -29,8 +36,8 @@ export default function AdminCitiesForm(): JSX.Element {
               <label>
                 Долгота
                 <FormInput
-                  type={'text'}
-                  name="longtitude"
+                  type="text"
+                  name="longitude"
                   placeholder="4.895168"
                 />
               </label>
@@ -38,9 +45,12 @@ export default function AdminCitiesForm(): JSX.Element {
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Уровень приближения
-                <FormInput type={'number'} name="zoom" placeholder="8" />
+                <FormInput type="number" name="zoom" placeholder="10" />
               </label>
             </div>
+            <button className="login__submit form__submit button" type="submit">
+              Создать город
+            </button>
           </form>
         </article>
       </div>

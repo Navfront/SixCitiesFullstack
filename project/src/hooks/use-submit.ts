@@ -3,7 +3,7 @@ import { useAppDispatch } from './../redux/redux-hooks';
 import { fetchLoginIn } from './../redux/thunks/login-thunk';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-interface UseSubmitReturn {
+export interface UseSubmitReturn {
   onSubmitHandler: (evt: FormEvent<HTMLFormElement>) => void;
 }
 

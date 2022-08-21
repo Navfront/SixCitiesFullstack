@@ -4,6 +4,7 @@ import { changeState } from '../reducers/auth-slice';
 import { RootState } from '../store';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+import { api } from './../store';
 
 const EXP_TIME = (1 / 24 / 60) * 5; // 5 min
 
@@ -16,14 +17,9 @@ export type RespError = Error & {
 };
 
 export const fetchLoginIn = (formData: any) => {
-  return async (
-    dispatch: Dispatch<Action>,
-    getState: () => RootState,
-    extraArgument: any
-  ) => {
-    const { serviceApi } = extraArgument;
+  return async (dispatch: Dispatch<Action>, getState: () => RootState) => {
     try {
-      const response = await serviceApi.loginIn(formData);
+      const response = await api.loginIn(formData);
       console.log(response.data);
       if (response.data.token.length > 0) {
         Cookies.set('token', response.data.token, {

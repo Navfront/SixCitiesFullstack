@@ -1,11 +1,10 @@
 import React from 'react';
-import { City } from '../../../../types/city';
 import { useAppSelector } from '../../../redux/redux-hooks';
 import FormInput from '../inputs/form-input';
 import style from './style.module.css';
 
 function AdminHotelsForm(): JSX.Element {
-  const cities = useAppSelector((state) => state.cities.cities as City[]);
+  const cities = useAppSelector((state) => state.cities.cities);
   const { userId } = useAppSelector((state) => state.auth);
 
   return (
@@ -151,6 +150,9 @@ function AdminHotelsForm(): JSX.Element {
                 <FormInput type="text" name="type" placeholder="apartment" />
               </label>
             </div>
+            <button className="login__submit form__submit button" type="submit">
+              Создать отель
+            </button>
           </form>
         </article>
       </div>

@@ -3,6 +3,10 @@ import ServiceApi from '../api/service-api';
 import authSlice from './reducers/auth-slice';
 import citySlice from './reducers/city-slice';
 
+export const api = new ServiceApi(
+  process.env.REACT_APP_SURV ?? 'http://localhost:5500/'
+);
+
 const rootReducer = combineReducers({
   auth: authSlice,
   cities: citySlice,
@@ -10,16 +14,6 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      thunk: {
-        extraArgument: {
-          serviceApi: new ServiceApi(
-            process.env.REACT_APP_SURV ?? 'http://localhost:5500/'
-          ),
-        },
-      },
-    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
