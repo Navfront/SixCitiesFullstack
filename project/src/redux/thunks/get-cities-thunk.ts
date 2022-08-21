@@ -3,6 +3,7 @@ import { Dispatch } from 'react';
 import { addCities } from '../reducers/city-slice';
 import { RootState } from '../store';
 import { RespError } from './login-thunk';
+import { toast } from 'react-toastify';
 
 export interface RespData {
   data: any;
@@ -25,7 +26,7 @@ export const fetchGetCities = () => {
       }
     } catch (error) {
       const err = error as RespError;
-      console.log(err.response.data.message);
+      toast(err.response.data.message);
     }
   };
 };
