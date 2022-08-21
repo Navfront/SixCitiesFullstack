@@ -5,6 +5,7 @@ export const authSlice = createSlice({
   initialState: {
     isAuth: false,
     isAdmin: false,
+    userId: '',
     email: '',
     username: '',
     token: '',
@@ -19,8 +20,10 @@ export const authSlice = createSlice({
       state.token = action.payload.token;
       state.email = action.payload.email;
       state.username = action.payload.username;
+      state.userId = action.payload.userId;
     },
     resetState: (state) => {
+      state.userId = '';
       state.isAdmin = false;
       state.isAuth = false;
       state.token = '';

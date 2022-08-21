@@ -42,6 +42,7 @@ export const fetchLoginIn = (formData: any) => {
           changeState({
             isAuth: true,
             isAdmin: response.data.role === 'admin',
+            userId: response.data.userId,
             token: response.data.token,
             username: response.data.username,
             email: response.data.email,
