@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import useValidate, { InputTypes } from '../../../hooks/use-validate';
 import useSubmit from './../../../hooks/use-submit';
