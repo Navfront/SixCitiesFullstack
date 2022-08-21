@@ -39,7 +39,7 @@ const validate = (type: string, value: string): string => {
 };
 
 export default function useValidate(
-  type: string = InputTypes.text,
+  type: string,
   errorCB: ErrorCB = () => {},
   placeholder: string = ''
 ): {

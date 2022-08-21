@@ -1,12 +1,8 @@
 import React from 'react';
-import useValidate, { InputTypes } from '../../../hooks/use-validate';
+import FormInput from '../inputs/form-input';
 import useSubmit from './../../../hooks/use-submit';
 
 function SignInFrom(): JSX.Element {
-  const { value: emailValue, onChangeHandler: emailChangeHandler } =
-    useValidate(InputTypes.email);
-  const { value: passwordValue, onChangeHandler: passwordChangeHandler } =
-    useValidate(InputTypes.password);
   const formRef = React.createRef<HTMLFormElement>();
   const { onSubmitHandler } = useSubmit(formRef);
 
@@ -20,29 +16,11 @@ function SignInFrom(): JSX.Element {
     >
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">E-mail</label>
-        <input
-          className="login__input form__input"
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={emailChangeHandler}
-          value={emailValue}
-          autoComplete="true"
-          required
-        />
+        <FormInput type={'email'} />
       </div>
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">Password</label>
-        <input
-          className="login__input form__input"
-          type="password"
-          name="password"
-          placeholder="Password"
-          autoComplete="true"
-          value={passwordValue}
-          onChange={passwordChangeHandler}
-          required
-        />
+        <FormInput type={'password'} />
       </div>
       <button className="login__submit form__submit button" type="submit">
         Sign in

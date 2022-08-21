@@ -14,7 +14,6 @@ export default function useSubmit(
   const navigate = useNavigate();
   const loc = useLocation().state as { from: { pathname: string } };
   const from = loc?.from?.pathname ?? '/';
-  console.log('from', from);
 
   const onSubmitHandler = async (
     evt: FormEvent<HTMLFormElement>
