@@ -3,6 +3,7 @@ import ServiceApi from '../api/service-api';
 import authSlice from './reducers/authSlice';
 
 export const store = configureStore({
+  devTools: false,
   reducer: {
     auth: authSlice,
   },

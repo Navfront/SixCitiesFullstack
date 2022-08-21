@@ -20,6 +20,7 @@ export default function FormInput({
   const { value, onChangeHandler } = useValidate(type);
   return (
     <input
+      id={name}
       className="login__input form__input"
       type={type}
       name={name}

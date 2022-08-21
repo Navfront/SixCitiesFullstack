@@ -1,7 +1,7 @@
-import { Helmet } from 'react-helmet-async';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import WithActiveLink from '../../hocs/with-active-link';
 import HeaderNav from '../ui/header-nav/header-nav';
+import { Helmet } from 'react-helmet-async';
 
 export default function AdminPage(): JSX.Element {
   const loc = useLocation();
@@ -52,12 +52,7 @@ export default function AdminPage(): JSX.Element {
           <div className="cities">
             <div className="cities__places-container container">
               <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">312 places to stay in Amsterdam</b>
-
-                <div className="cities__places-list places__list tabs__content">
-                  <Outlet />
-                </div>
+                <Outlet />
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map"></section>

@@ -25,6 +25,10 @@ export default class ServiceApi {
   async loginIn(body: any): Promise<string | string[]> {
     return await this.axiosInstance.post('login', body);
   }
+
+  async getCities(): Promise<string | string[]> {
+    return await this.axiosInstance.get('cities');
+  }
 }
 
 export type ServiceApiType = InstanceType<typeof ServiceApi>;

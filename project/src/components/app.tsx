@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import AdminPage from './pages/admin-page';
 import WithPrivate from '../hocs/with-private';
 import MainPage from './pages/main-page';
+import AdminCitiesForm from './ui/admin-cities-form/admin-cities-form';
+import AdminHotelsForm from './ui/admin-hotel-form/admin-hotel-form';
 
 export default function App(): JSX.Element {
   return (
@@ -27,8 +29,8 @@ export default function App(): JSX.Element {
               </WithPrivate>
             }
           >
-            <Route path="city" element={<p>city</p>} />
-            <Route path="hotel" element={<p>hotel</p>} />
+            <Route path="city" element={<AdminCitiesForm />} />
+            <Route path="hotel" element={<AdminHotelsForm />} />
             <Route path="review" element={<p>review</p>} />
           </Route>
         </Routes>
