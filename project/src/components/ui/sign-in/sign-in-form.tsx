@@ -15,11 +15,15 @@ function SignInFrom(): JSX.Element {
       method="post"
     >
       <div className="login__input-wrapper form__input-wrapper">
-        <label className="visually-hidden">E-mail</label>
+        <label htmlFor="email" className="visually-hidden">
+          E-mail
+        </label>
         <FormInput type={'email'} />
       </div>
       <div className="login__input-wrapper form__input-wrapper">
-        <label className="visually-hidden">Password</label>
+        <label htmlFor="password" className="visually-hidden">
+          Password
+        </label>
         <FormInput type={'password'} />
       </div>
       <button className="login__submit form__submit button" type="submit">
