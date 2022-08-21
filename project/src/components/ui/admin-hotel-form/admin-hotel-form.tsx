@@ -50,8 +50,8 @@ function AdminHotelsForm(): JSX.Element {
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label>
-                Уровень приближения
-                <FormInput type={'text'} name="zoom" placeholder="8" />
+                Количество спален
+                <FormInput type={'number'} name="bedrooms" placeholder="3" />
               </label>
             </div>
           </form>

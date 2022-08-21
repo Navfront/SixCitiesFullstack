@@ -2,7 +2,7 @@ import React from 'react';
 import useValidate from '../../../hooks/use-validate';
 
 interface FormInputProps {
-  type: 'email' | 'password' | 'text';
+  type: 'email' | 'password' | 'text' | 'number';
   name?: string;
   placeholder?: string;
 }
@@ -20,7 +20,6 @@ export default function FormInput({
   const { value, onChangeHandler } = useValidate(type);
   return (
     <input
-      id={name}
       className="login__input form__input"
       type={type}
       name={name}
