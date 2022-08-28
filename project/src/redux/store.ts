@@ -5,7 +5,11 @@ import citySlice from './reducers/city-slice';
 import appSlice from './reducers/app-slice';
 import hotelSlice from './reducers/hotel-slice';
 
-export const api = new ServiceApi('https://sixcities.navfront.ru/api');
+export const api = new ServiceApi(
+  process.env.REACT_APP_SURV ?? 'https://sixcities.navfront.ru/api'
+);
+
+console.log(process.env.REACT_APP_SURV);
 
 const rootReducer = combineReducers({
   auth: authSlice,

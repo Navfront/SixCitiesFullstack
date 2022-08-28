@@ -8,7 +8,7 @@ import { CreateCity } from '../../api/service-api';
 import { api } from './../store';
 import { updateCities } from '../reducers/city-slice';
 
-export interface RespData {
+interface RespData {
   data: {
     name: string;
     message: string;

@@ -2,11 +2,13 @@ import React from 'react';
 import { useAppSelector } from '../../../redux/redux-hooks';
 import FormInput from '../inputs/form-input';
 import style from './style.module.css';
+import useSubmitHotel from './../../../hooks/uer-submit-hotel';
 
 function AdminHotelsForm(): JSX.Element {
   const cities = useAppSelector((state) => state.cities.cities);
   const { userId } = useAppSelector((state) => state.auth);
   const targetLocation = useAppSelector((state) => state.app.currentTarget);
+  const { onSubmitHandler } = useSubmitHotel();
 
   return (
     <>
@@ -15,7 +17,11 @@ function AdminHotelsForm(): JSX.Element {
 
       <div className="cities__places-list places__list tabs__content">
         <article className="cities__place-card">
-          <form action="#" className="login__form form">
+          <form
+            action="#"
+            className="login__form form"
+            onSubmit={onSubmitHandler}
+          >
             <div className="login__input-wrapper form__input-wrapper">
               <label className={style.label}>
                 Город
@@ -106,7 +112,13 @@ function AdminHotelsForm(): JSX.Element {
               </label>
             </div>
             <div className="login__input-wrapper form__input-wrapper">
-              <input type="text" name="host" value={userId} hidden />
+              <input
+                type="text"
+                name="host"
+                value={userId}
+                hidden
+                readOnly={true}
+              />
               <input type="checkbox" name="is_favorite" hidden />
               <label>
                 Урл фоток через запятую
@@ -124,12 +136,6 @@ function AdminHotelsForm(): JSX.Element {
                   <span className={style.text}>Это отель премиум класса</span>
                   <input type="checkbox" name="is_premium" />
                 </p>
-              </label>
-            </div>
-            <div className="login__input-wrapper form__input-wrapper">
-              <label>
-                Название города
-                <FormInput type={'text'} name="name" placeholder="Amsterdam" />
               </label>
             </div>
 
