@@ -34,8 +34,9 @@ export default function AdminCitiesForm(): JSX.Element {
                   type="text"
                   name="latitude"
                   placeholder="52.370216"
-                  value={currentCity.lat ?? currentCity.lat}
+                  value={currentCity.lat}
                   disabled
+                  readOnly={true}
                 />
               </label>
             </div>
@@ -47,8 +48,9 @@ export default function AdminCitiesForm(): JSX.Element {
                   type="text"
                   name="longitude"
                   placeholder="4.895168"
-                  value={currentCity.lng ?? currentCity.lng}
+                  value={currentCity.lng}
                   disabled
+                  readOnly={true}
                 />
               </label>
             </div>
@@ -60,8 +62,9 @@ export default function AdminCitiesForm(): JSX.Element {
                   type="number"
                   name="zoom"
                   placeholder="10"
-                  value={currentCity.zoom ?? currentCity.zoom}
+                  value={currentCity.zoom}
                   disabled
+                  readOnly={true}
                 />
               </label>
             </div>
