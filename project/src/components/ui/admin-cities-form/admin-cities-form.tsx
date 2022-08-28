@@ -6,7 +6,7 @@ import styles from './admin-cities-form.module.css';
 
 export default function AdminCitiesForm(): JSX.Element {
   const { onSubmitHandler } = useSubmitCity();
-  const currentCity = useAppSelector((state) => state.app.currentCityLocation);
+  const currentCity = useAppSelector((state) => state.app.currentTarget);
 
   return (
     <>

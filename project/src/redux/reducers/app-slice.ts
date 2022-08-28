@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface CurrentLocation {
+interface currentTarget {
   lat: number;
   lng: number;
   zoom: number;
@@ -9,15 +9,15 @@ interface CurrentLocation {
 export const appSlice = createSlice({
   name: 'app',
   initialState: {
-    currentCityLocation: {
+    currentTarget: {
       lat: 0,
       lng: 0,
       zoom: 0,
     },
   },
   reducers: {
-    setActiveCity: (state, action: { payload: CurrentLocation }) => {
-      state.currentCityLocation = action.payload;
+    setActiveCity: (state, action: { payload: currentTarget }) => {
+      state.currentTarget = action.payload;
     },
   },
 });
