@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import { fetchGetCities } from '../../redux/thunks/get-cities-thunk';
 import { useAppDispatch } from '../../redux/redux-hooks';
+import Leaflet from '../ui/leaflet/leaflet';
 
 export default function AdminPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -61,7 +62,9 @@ export default function AdminPage(): JSX.Element {
                 <Outlet />
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"></section>
+                <section className="cities__map map">
+                  <Leaflet />
+                </section>
               </div>
             </div>
           </div>
