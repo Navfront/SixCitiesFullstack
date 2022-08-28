@@ -1,14 +1,15 @@
 import FormInput from '../inputs/form-input';
 import useSubmitCity from './../../../hooks/use-submit-city';
+import AdminCitiesList from './../admin-cities-list/admin-cities-list';
 
 export default function AdminCitiesForm(): JSX.Element {
   const { onSubmitHandler } = useSubmitCity();
 
   return (
     <>
+      <AdminCitiesList />
       <h2 className="visually-hidden">Create city</h2>
       <b className="places__found">Форма создания нового города</b>
-
       <div className="cities__places-list places__list tabs__content">
         <article className="cities__place-card">
           <form
