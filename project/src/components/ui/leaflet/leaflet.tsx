@@ -1,5 +1,6 @@
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
+import CurrentLocation from './current-location';
 
 const center = {
   lat: 51.505,
@@ -20,6 +21,8 @@ const ActivePin = L.icon({
 });
 
 export default function Leaflet(): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   return (
     <>
       <MapContainer
@@ -41,6 +44,7 @@ export default function Leaflet(): JSX.Element {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
+        <CurrentLocation />
       </MapContainer>
     </>
   );

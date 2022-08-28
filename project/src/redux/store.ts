@@ -2,12 +2,14 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import ServiceApi from '../api/service-api';
 import authSlice from './reducers/auth-slice';
 import citySlice from './reducers/city-slice';
+import appSlice from './reducers/app-slice';
 
 export const api = new ServiceApi('https://sixcities.navfront.ru/api');
 
 const rootReducer = combineReducers({
   auth: authSlice,
   cities: citySlice,
+  app: appSlice,
 });
 
 export const store = configureStore({

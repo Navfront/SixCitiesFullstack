@@ -1,9 +1,12 @@
+import { useAppSelector } from '../../../redux/redux-hooks';
 import FormInput from '../inputs/form-input';
 import useSubmitCity from './../../../hooks/use-submit-city';
 import AdminCitiesList from './../admin-cities-list/admin-cities-list';
+import styles from './admin-cities-form.module.css';
 
 export default function AdminCitiesForm(): JSX.Element {
   const { onSubmitHandler } = useSubmitCity();
+  const currentCity = useAppSelector((state) => state.app.currentCityLocation);
 
   return (
     <>
@@ -26,27 +29,40 @@ export default function AdminCitiesForm(): JSX.Element {
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Широта
-                <FormInput
+                <input
+                  className={styles.disabled + ' login__input form__input'}
                   type="text"
                   name="latitude"
                   placeholder="52.370216"
+                  value={currentCity.lat ?? currentCity.lat}
+                  disabled
                 />
               </label>
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Долгота
-                <FormInput
+                <input
+                  className={styles.disabled + ' login__input form__input'}
                   type="text"
                   name="longitude"
                   placeholder="4.895168"
+                  value={currentCity.lng ?? currentCity.lng}
+                  disabled
                 />
               </label>
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Уровень приближения
-                <FormInput type="number" name="zoom" placeholder="10" />
+                <input
+                  className={styles.disabled + ' login__input form__input'}
+                  type="number"
+                  name="zoom"
+                  placeholder="10"
+                  value={currentCity.zoom ?? currentCity.zoom}
+                  disabled
+                />
               </label>
             </div>
             <button className="login__submit form__submit button" type="submit">
