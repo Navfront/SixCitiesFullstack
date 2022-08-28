@@ -6,6 +6,7 @@ import style from './style.module.css';
 function AdminHotelsForm(): JSX.Element {
   const cities = useAppSelector((state) => state.cities.cities);
   const { userId } = useAppSelector((state) => state.auth);
+  const targetLocation = useAppSelector((state) => state.app.currentTarget);
 
   return (
     <>
@@ -27,6 +28,47 @@ function AdminHotelsForm(): JSX.Element {
                 </select>
               </label>
             </div>
+
+            <div className="login__input-wrapper form__input-wrapper">
+              <label>
+                Широта
+                <input
+                  className={style.disabled + ' login__input form__input'}
+                  type="text"
+                  name="latitude"
+                  placeholder="52.370216"
+                  value={targetLocation.lat}
+                  disabled
+                  readOnly={true}
+                />
+              </label>
+            </div>
+            <div className="login__input-wrapper form__input-wrapper">
+              <label>
+                Долгота
+                <input
+                  className={style.disabled + ' login__input form__input'}
+                  type="text"
+                  name="longitude"
+                  placeholder="4.895168"
+                  value={targetLocation.lng}
+                  disabled
+                  readOnly={true}
+                />
+              </label>
+            </div>
+
+            <input
+              className={style.disabled + ' login__input form__input'}
+              type="number"
+              name="zoom"
+              placeholder="10"
+              value={targetLocation.zoom}
+              disabled
+              readOnly={true}
+              hidden
+            />
+
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Заголовок
@@ -90,32 +132,7 @@ function AdminHotelsForm(): JSX.Element {
                 <FormInput type={'text'} name="name" placeholder="Amsterdam" />
               </label>
             </div>
-            <div className="login__input-wrapper form__input-wrapper">
-              <label>
-                Широта
-                <FormInput
-                  type={'text'}
-                  name="latitude"
-                  placeholder="52.35514938496378"
-                />
-              </label>
-            </div>
-            <div className="login__input-wrapper form__input-wrapper">
-              <label>
-                Долгота
-                <FormInput
-                  type={'text'}
-                  name="longtitude"
-                  placeholder="4.673877537499948"
-                />
-              </label>
-            </div>
-            <div className="login__input-wrapper form__input-wrapper">
-              <label>
-                Уровень приближения
-                <FormInput type="number" name="zoom" placeholder="8" />
-              </label>
-            </div>
+
             <div className="login__input-wrapper form__input-wrapper">
               <label>
                 Количество несовершеннолетних
