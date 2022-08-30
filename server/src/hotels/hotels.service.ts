@@ -1,6 +1,6 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { ReqUser } from 'src/auth/jwt-auth.guard';
 import { City, CityDocument } from 'src/cities/schemas/city.schema';
 import { Location, LocationDocument } from 'src/cities/schemas/location.schema';
@@ -77,7 +77,10 @@ export class HotelsService {
   }
 
   async findAllByCityId(id: string) {
-    const result = await this.hotelModel.find({ city: id });
+    const oId = new Types.ObjectId(id);
+    const result = await this.hotelModel.find({ city: oId });
+    console.log('id', id, 'нашел', result);
+
     if (!result) {
       throw new HttpException('Такого города нет!', HttpStatus.NOT_FOUND);
     }
