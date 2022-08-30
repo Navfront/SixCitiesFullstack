@@ -73,7 +73,7 @@ export class HotelsService {
 
     location.save();
     city.save();
-    return hotel;
+    return hotel.populate('location', 'latitude longitude');
   }
 
   async findAllByCityId(id: string) {
@@ -90,7 +90,9 @@ export class HotelsService {
   }
 
   async findAllNearBy(id: string) {
-    const target = await this.hotelModel.findById(id);
+    const target = await (
+      await this.hotelModel.findById(id)
+    ).populate('location', 'latitude longitude');
     if (!target) {
       throw new HttpException('Такого hotel нет!', HttpStatus.NOT_FOUND);
     }
@@ -111,7 +113,9 @@ export class HotelsService {
   }
 
   async findOne(id: string) {
-    const result = await this.hotelModel.findById(id);
+    const result = await this.hotelModel
+      .findById(id)
+      .populate('location', 'latitude longitude');
     if (!result) {
       throw new HttpException('Такого отеля нет!', HttpStatus.NOT_FOUND);
     }
