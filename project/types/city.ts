@@ -7,3 +7,12 @@ export interface City {
   };
   name: string;
 }
+
+export interface FullCity extends City {
+  location: {
+    _id: string;
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+}

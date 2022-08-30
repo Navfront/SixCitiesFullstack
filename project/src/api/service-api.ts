@@ -35,6 +35,37 @@ export interface CreateHotel {
 export interface ResponseData {
   data: any;
 }
+
+interface ResponseCity {
+  data: {
+    name: string;
+    _id: string;
+    location: string;
+  };
+}
+
+interface ResponseLocation {
+  data: {
+    _id: string;
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+}
+
+interface ResponseFullCity {
+  data: {
+    _id: string;
+    name: string;
+    location: {
+      _id: string;
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+  };
+}
+
 export default class ServiceApi {
   private readonly axiosInstance;
 
@@ -69,8 +100,22 @@ export default class ServiceApi {
     return await this.axiosInstance.post('cities', body);
   }
 
+  async getCityById(_id: string): Promise<ResponseFullCity> {
+    const cityResp = await this.axiosInstance.get<any, ResponseCity>(
+      `cities/${_id}`
+    );
+    const locationResp = await this.axiosInstance.get<any, ResponseLocation>(
+      `cities/location/${cityResp.data.location}`
+    );
+    return { data: { ...cityResp.data, location: { ...locationResp.data } } };
+  }
+
   async postHotel(body: CreateHotel): Promise<ResponseData> {
     return await this.axiosInstance.post('hotels', body);
+  }
+
+  async getHotelsByCityId(_id: string): Promise<ResponseData> {
+    return await this.axiosInstance.get(`hotels/city/${_id}`);
   }
 }
 

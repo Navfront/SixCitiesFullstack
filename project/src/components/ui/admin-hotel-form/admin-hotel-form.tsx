@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { useAppSelector } from '../../../redux/redux-hooks';
 import FormInput from '../inputs/form-input';
 import style from './style.module.css';
 import useSubmitHotel from './../../../hooks/uer-submit-hotel';
+import { useAppDispatch } from './../../../redux/redux-hooks';
+import { fetchGetHotels } from '../../../redux/thunks/get-hotels-thunk';
+import { setCurrentCityFetch } from '../../../redux/thunks/set-current-city-thunk';
 
 function AdminHotelsForm(): JSX.Element {
   const cities = useAppSelector((state) => state.cities.cities);
   const { userId } = useAppSelector((state) => state.auth);
   const targetLocation = useAppSelector((state) => state.app.currentTarget);
+  const dispatch = useAppDispatch();
   const { onSubmitHandler } = useSubmitHotel();
+
+  const onCityChangeHandler = (e: SyntheticEvent<HTMLSelectElement>): void => {
+    void dispatch(fetchGetHotels(e.currentTarget.value));
+    void dispatch(setCurrentCityFetch(e.currentTarget.value));
+  };
 
   return (
     <>
       <h2 className="visually-hidden">Create city</h2>
-      <b className="places__found">Форма создания нового отеля</b>
+      <b className="places__found">Форма создания нового отеля в {}</b>
 
       <div className="cities__places-list places__list tabs__content">
         <article className="cities__place-card">
@@ -25,7 +34,11 @@ function AdminHotelsForm(): JSX.Element {
             <div className="login__input-wrapper form__input-wrapper">
               <label className={style.label}>
                 Город
-                <select name="city" className={style.select}>
+                <select
+                  name="city"
+                  className={style.select}
+                  onChange={onCityChangeHandler}
+                >
                   {cities.map((city) => (
                     <option key={city._id} value={city._id}>
                       {city.name}

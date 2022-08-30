@@ -30,7 +30,7 @@ export const hotelSlice = createSlice({
   },
   reducers: {
     addHotels: (state, action) => {
-      state.hotels = action.payload.cities;
+      state.hotels = [...action.payload];
     },
     updateHotel: (state, action) => {
       state.hotels = [...state.hotels, action.payload];
