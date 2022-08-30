@@ -32,6 +32,9 @@ export interface CreateHotel {
   type: string;
 }
 
+export interface Hotel extends CreateHotel {
+  _id: string;
+}
 export interface ResponseData {
   data: any;
 }

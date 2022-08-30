@@ -9,6 +9,7 @@ import { setCurrentCityFetch } from '../../../redux/thunks/set-current-city-thun
 
 function AdminHotelsForm(): JSX.Element {
   const cities = useAppSelector((state) => state.cities.cities);
+  const currentCity = useAppSelector((state) => state.app.currentCity);
   const { userId } = useAppSelector((state) => state.auth);
   const targetLocation = useAppSelector((state) => state.app.currentTarget);
   const dispatch = useAppDispatch();
@@ -22,7 +23,9 @@ function AdminHotelsForm(): JSX.Element {
   return (
     <>
       <h2 className="visually-hidden">Create city</h2>
-      <b className="places__found">Форма создания нового отеля в {}</b>
+      <b className="places__found">
+        Форма создания нового отеля в {currentCity.name}
+      </b>
 
       <div className="cities__places-list places__list tabs__content">
         <article className="cities__place-card">
