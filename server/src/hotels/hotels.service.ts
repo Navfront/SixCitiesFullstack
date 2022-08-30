@@ -78,7 +78,9 @@ export class HotelsService {
 
   async findAllByCityId(id: string) {
     const oId = new Types.ObjectId(id);
-    const result = await this.hotelModel.find({ city: oId });
+    const result = await this.hotelModel
+      .find({ city: oId })
+      .populate('location', 'latitude longitude');
     console.log('id', id, 'нашел', result);
 
     if (!result) {
