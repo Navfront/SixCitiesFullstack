@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package.json /app/package.json
 RUN npm install --only=prod
 COPY . /app
+ENV NODE_ENV=production
 RUN npm run build
 
 FROM node:18.6-alpine
