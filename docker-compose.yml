@@ -2,27 +2,25 @@ version: '3'
 
 services:
   dbmongo:
-    image: 'mongo'
-    restart: always
+    image: 'mongo:4.4.6'
     ports:
       - "27017:27017"
+    restart: always
+
   scserver:
-    image: dikardv/scsrv:0.0.2
+    image: dikardv/scsrv:0.1.1
     restart: always
     ports:
       - "5500:5500"
     environment:
-      PORT: 5500
-      SECRET: qwerty
-      MONGO: mongodb://dbmongo:27017
+      PORT: "5500"
+      SECRET: "qwerty"
+      MONGO: "mongodb://dbmongo:27017"
     depends_on:
       - dbmongo
 
   sccl:
-    image: dikardv/sccl:0.0.2
+    image: dikardv/sccl:0.1.1
     restart: always
     ports:
       - "3000:80"
-    environment:
-      - SURL: http://sixcities.navfront.ru/api
-
