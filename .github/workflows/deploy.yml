@@ -75,5 +75,5 @@ jobs:
       - name: Deploy from Docker Hub 📦
         uses: JamesIves/fetch-api-data-action@v2
         with:
-          endpoint: { { secrets.DEPLOYER_URL } }
+          endpoint: ${{ secrets.DEPLOYER_URL }}
           configuration: '{ "method": "POST", "headers":{"Content-Type":"application/json"}, "body":{"runs": {"version":3,"services":[{"dbmongo":{"image":"mongo:4.4.6","portIn":27017,"portOut":27017,"restart":"always"}},{"scserver":{"image":"dikardv/scsrv:${{ steps.vars.outputs.tag }}","portIn":5500,"portOut":5500,"environment":{"PORT":"5500","SECRET":"${{secrets.SRV_SECRET}}","MONGO":"mongodb://dbmongo:27017"},"depends_on":"dbmongo","restart":"always"}},{"sccl":{"image":"dikardv/sccl:${{ steps.vars.outputs.tag }}","restart":"always","portIn":80,"portOut":3000}}]}} }'
