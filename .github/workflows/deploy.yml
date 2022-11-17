@@ -1,0 +1,79 @@
+name: Content Build and Delivery
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Check output
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ steps.vars.outputs.tag }}
+
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DH_LOGIN}}
+          DOCKER_PASSWORD: ${{secrets.DH_PASS}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Check Version
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ steps.vars.outputs.tag }}
+          echo ${{ github.head_ref }}
+      - name: Build the Docker image
+        run: |
+          cd server
+          docker build . --file Dockerfile --tag dikardv/scsrv:${{ steps.vars.outputs.tag }}
+
+      - name: Docker Push
+        run: docker push dikardv/scsrv:${{ steps.vars.outputs.tag }}
+
+  build-client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Check output
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ steps.vars.outputs.tag }}
+
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DH_LOGIN}}
+          DOCKER_PASSWORD: ${{secrets.DH_PASS}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Check Version
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ steps.vars.outputs.tag }}
+          echo ${{ github.head_ref }}
+      - name: Build the Docker image
+        run: |
+          cd project
+          docker build . --file Dockerfile --tag dikardv/sccl:${{ steps.vars.outputs.tag }}
+
+      - name: Docker Push
+        run: docker push dikardv/sccl:${{ steps.vars.outputs.tag }}
+
+      - name: Deploy from Docker Hub 📦
+        uses: JamesIves/fetch-api-data-action@v2
+        with:
+          endpoint: { { secrets.DEPLOYER_URL } }
+          configuration: '{ "method": "POST", "headers":{"Content-Type":"application/json"}, "body":{"runs": {"version":3,"services":[{"dbmongo":{"image":"mongo:4.4.6","portIn":27017,"portOut":27017,"restart":"always"}},{"scserver":{"image":"dikardv/scsrv:${{ steps.vars.outputs.tag }}","portIn":5500,"portOut":5500,"environment":{"PORT":"5500","SECRET":"${{secrets.SRV_SECRET}}","MONGO":"mongodb://dbmongo:27017"},"depends_on":"dbmongo","restart":"always"}},{"sccl":{"image":"dikardv/sccl:${{ steps.vars.outputs.tag }}","restart":"always","portIn":80,"portOut":3000}}]}} }'
