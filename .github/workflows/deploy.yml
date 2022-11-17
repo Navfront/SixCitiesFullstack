@@ -38,6 +38,7 @@ jobs:
         run: docker push dikardv/scsrv:${{ steps.vars.outputs.tag }}
 
   build-client:
+    needs: build-server
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
