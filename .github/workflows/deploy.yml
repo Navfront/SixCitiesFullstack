@@ -32,7 +32,7 @@ jobs:
           echo ${{ steps.vars.outputs.tag }}
           echo ${{ github.head_ref }}
       - name: Build the Docker image
-        run: docker build ./server/ --file Dockerfile --tag dikardv/scsrv:${{ steps.vars.outputs.tag }}
+        run: cd server && docker build . --file Dockerfile --tag dikardv/scsrv:${{ steps.vars.outputs.tag }}
 
       - name: Docker Push
         run: docker push dikardv/scsrv:${{ steps.vars.outputs.tag }}
@@ -63,7 +63,7 @@ jobs:
           echo ${{ steps.vars.outputs.tag }}
           echo ${{ github.head_ref }}
       - name: Build the Docker image
-        run: docker build ./project/ --file Dockerfile --tag dikardv/sccl:${{ steps.vars.outputs.tag }}
+        run: cd project && docker build . --file Dockerfile --tag dikardv/sccl:${{ steps.vars.outputs.tag }}
 
       - name: Docker Push
         run: docker push dikardv/sccl:${{ steps.vars.outputs.tag }}
