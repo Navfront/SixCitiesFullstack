@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ReqUser } from './auth/jwt-auth.guard';
+import { User } from 'src/users/schemas/user.schema';
 
 @Injectable()
 export class AppService {
-  async greeting(user: ReqUser) {
+  async greeting(user: User) {
     return { message: `Hello ${user.username || 'Anonimous'}!` };
   }
 }

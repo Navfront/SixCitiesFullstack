@@ -6,7 +6,7 @@ export interface Todo {
 
 export interface User {
   userId: string;
-  username: string;
+  email: string;
   password: string;
   todos?: Todo[];
 }
@@ -22,7 +22,7 @@ class UsersModel {
     this.#users = [
       {
         userId: 'user' + this.newId,
-        username: 'admin',
+        email: 'admin',
         password:
           '$2b$05$DDP8zfsro6vNXSNtZGiZo.6wGDaA3odsenjhpm4aJCsRPilazkUsO',
         todos: [
@@ -50,9 +50,9 @@ class UsersModel {
   }
 
   async createUser(
-    user: Pick<User, 'username' | 'password'>,
+    user: Pick<User, 'email' | 'password'>,
   ): Promise<false | User> {
-    const findedUser = this.#users.find((it) => it.username === user.username);
+    const findedUser = this.#users.find((it) => it.email === user.email);
     if (findedUser) {
       return false;
     }
@@ -67,7 +67,7 @@ class UsersModel {
   }
 
   async findUserByName(username: string): Promise<User | undefined> {
-    const user = this.#users.find((user) => user.username === username);
+    const user = this.#users.find((user) => user.email === username);
     return user;
   }
 

@@ -1,0 +1,22 @@
+.select {
+  padding: 14px 0;
+  display: flex;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.select, .select::before{
+  border-color: #E6E6E6;
+  color: rgb(133, 133, 133)
+}
+
+.text{
+  color: rgb(133, 133, 133);
+  margin-right: 10px;
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+

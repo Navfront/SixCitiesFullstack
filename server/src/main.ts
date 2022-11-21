@@ -9,8 +9,8 @@ async function start() {
     const app = await NestFactory.create(AppModule);
     app.enableCors();
     const config = new DocumentBuilder()
-      .setTitle('ToDo Server')
-      .setDescription('NESTJS Server for my SimpleToDo app.')
+      .setTitle('SixCities server')
+      .setDescription('NESTJS Server for my SixCities app.')
       .setVersion('1.0.0')
       .addTag('Navfront.ru')
       .build();

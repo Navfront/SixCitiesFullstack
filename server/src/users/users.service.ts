@@ -23,7 +23,7 @@ export class UsersService {
 
   async createUser(userData: CreateUserDto) {
     return await appModel.createUser({
-      username: userData.login,
+      email: userData.email,
       password: userData.password,
     });
   }
