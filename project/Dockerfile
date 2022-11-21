@@ -1,4 +1,4 @@
-FROM node:18.6-alpine as builder
+FROM node:latest as builder
 WORKDIR /app
 COPY package.json /app/package.json
 RUN npm install --omit=dev
