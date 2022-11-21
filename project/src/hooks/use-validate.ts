@@ -18,8 +18,6 @@ const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
 const validate = (type: string, value: string): string => {
   if (value.trim().length < 1) {
     return 'Строка не должна быть пустой!';
-  } else if (value.trim().length > 16) {
-    return 'Не более 16 символов!';
   }
   switch (type) {
     case InputTypes.email:

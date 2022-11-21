@@ -1,10 +1,10 @@
-import React from 'react';
 import useValidate from '../../../hooks/use-validate';
 
 interface FormInputProps {
   type: 'email' | 'password' | 'text' | 'number';
   name?: string;
   placeholder?: string;
+  maxLength?: number;
 }
 
 /**
@@ -16,6 +16,7 @@ export default function FormInput({
   type,
   name = type,
   placeholder = type[0].toUpperCase().concat(type.slice(1)),
+  maxLength = 1000,
 }: FormInputProps): JSX.Element {
   const { value, onChangeHandler } = useValidate(type);
   return (
@@ -27,6 +28,7 @@ export default function FormInput({
       onChange={onChangeHandler}
       value={value}
       autoComplete="true"
+      maxLength={maxLength}
       required
     />
   );

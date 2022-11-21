@@ -56,7 +56,7 @@ export default function Leaflet(): JSX.Element {
                 icon={Pin}
               >
                 <Popup>
-                  {hotel.title}. <br /> {String(hotel.price) + ' $'}.
+                  {hotel.title}. <br /> {String(hotel.price) + ' ₽'}.
                 </Popup>
               </Marker>
             ))

@@ -81,7 +81,7 @@ export class HotelsService {
     const result = await this.hotelModel
       .find({ city: oId })
       .populate('location', 'latitude longitude');
-    console.log('id', id, 'нашел', result);
+    console.log('id', id, 'все отели', result.length);
 
     if (!result) {
       throw new HttpException('Такого города нет!', HttpStatus.NOT_FOUND);
